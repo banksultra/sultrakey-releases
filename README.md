@@ -103,6 +103,8 @@ REDIS_PASSWORD=
 | `# @optional` | Boleh kosong. Aplikasi menerima string kosong.                                              |
 | `# @masking`  | Diketik sebagai `*` dan diisi dua kali. Untuk rahasia yang namanya tidak terdengar rahasia (`DATABASE_URL`). |
 
+- Beberapa anotasi bisa digabung di satu baris yang sama, dipisah spasi, contoh `# @plain @optional`.
+
 - Nilai di template jadi default untuk variabel biasa. Untuk variabel rahasia, nilainya diabaikan dan harus diketik.
 - Kosongkan nilai contoh seperti `SMTP_HOST=smtp.example.com`. Kalau tidak, contoh itu ikut tersimpan sebagai nilai asli.
 - Nilai panjang (misalnya sertifikat): di `setup` ketik `@/path/ke/file`, atau jalankan `sultrakey set KEY --file <path>`.
