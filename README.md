@@ -20,8 +20,8 @@ Node.js · PHP · CodeIgniter · Spring Boot · Go · Rust · apa saja yang memb
 [Install](#install) ·
 [Quick start](#quick-start) ·
 [Template](#template-envexample) ·
-[Perintah](#perintah) ·
-[Per bahasa](#cara-pakai-per-bahasa) ·
+[Commands](#commands) ·
+[Usage](#usage-per-bahasa) ·
 [pm2](#pm2) ·
 [Docker](#docker) ·
 [Update](#update)
@@ -107,7 +107,7 @@ REDIS_PASSWORD=
 - Kosongkan nilai contoh seperti `SMTP_HOST=smtp.example.com`. Kalau tidak, contoh itu ikut tersimpan sebagai nilai asli.
 - Nilai panjang (misalnya sertifikat): di `setup` ketik `@/path/ke/file`, atau jalankan `sultrakey set KEY --file <path>`.
 
-## Perintah
+## Commands
 
 | Perintah                            | Fungsi                                                                                     |
 | ----------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -131,7 +131,7 @@ Key dicari berurutan di:
 Exit code: `0` berhasil, `64` salah pemakaian, `78` masalah konfigurasi, `1` lainnya.
 Exit code `78` dipakai pm2 dan systemd sebagai tanda untuk berhenti me-restart aplikasi.
 
-## Cara kerja `run`
+## How `run` works
 
 - Aplikasi **tidak perlu diubah**. Ia tetap baca environment variable seperti biasa.
 - Linux/macOS: sultrakey menggantikan dirinya dengan proses aplikasi (`exec`). PID, sinyal stop, dan exit code langsung ke aplikasi.
@@ -140,7 +140,7 @@ Exit code `78` dipakai pm2 dan systemd sebagai tanda untuk berhenti me-restart a
 - Variabel `@optional` yang kosong dikirim sebagai string kosong.
 - Variabel berawalan `SULTRAKEY_` tidak diteruskan ke aplikasi.
 
-## Cara pakai per bahasa
+## Usage per bahasa
 
 Polanya sama untuk semua: tambahkan `sultrakey run --` di depan perintah start aplikasi.
 
