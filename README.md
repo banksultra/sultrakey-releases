@@ -18,7 +18,7 @@ Node.js · PHP · CodeIgniter · Spring Boot · Go · Rust · apa saja yang memb
 <br>
 
 [Install](#install) ·
-[Mulai cepat](#mulai-cepat) ·
+[Quick start](#quick-start) ·
 [Template](#template-envexample) ·
 [Perintah](#perintah) ·
 [Per bahasa](#cara-pakai-per-bahasa) ·
@@ -50,7 +50,7 @@ Release dimulai dari 0.6.1.
 
 Cek hasilnya dengan `sultrakey --version`.
 
-## Mulai cepat
+## Quick start
 
 1. Di repo aplikasi, siapkan `.env.example` berisi semua variabel (nilainya kosong, atau default yang bukan rahasia).
 2. Masukkan `.env` dan `.env.lock` ke `.gitignore`. Jangan pakai pola `.env*`, nanti `.env.example` ikut ke-ignore.
