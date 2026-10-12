@@ -30,16 +30,6 @@ Node.js · PHP · CodeIgniter · Spring Boot · Go · Rust · apa saja yang memb
 
 ---
 
-Repository ini cuma berisi file release. Source code-nya privat.
-
-## Kenapa sultrakey
-
-|                              |                                                                                        |
-| ---------------------------- | -------------------------------------------------------------------------------------- |
-| 📦 **Satu binary statis**    | Tanpa dependency. Jalan di Rocky Linux 8/9, Ubuntu, CentOS 7, Windows, dan macOS. |
-| 🛡️ **Enkripsi standar**      | [age](https://age-encryption.org) X25519, bukan kriptografi buatan sendiri.            |
-| 🔌 **Aplikasi tidak diubah** | Aplikasi tetap baca environment variable seperti biasa.                                   |
-
 ## Install
 
 Windows (PowerShell, tanpa hak Administrator):
