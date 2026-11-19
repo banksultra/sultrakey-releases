@@ -50,12 +50,30 @@ Release dimulai dari 0.6.1.
 
 Cek hasilnya dengan `sultrakey --version`.
 
+### CentOS / Rocky Linux
+
+Perintahnya sama dengan perintah server di atas:
+
+```sh
+curl -fsSL https://github.com/banksultra/sultrakey-releases/releases/latest/download/install.sh | sudo sh
+```
+
+- Server yang `/tmp`-nya di-mount `noexec` (umum di server hasil hardening) didukung sejak 0.7.0. Script otomatis
+  memakai folder sementara di home user, lalu menulis `Note: /tmp does not allow running programs (noexec) ...`.
+- `curl` belum ada (image minimal): `sudo dnf install -y curl` (CentOS 7: `sudo yum install -y curl`).
+- Server pakai proxy: jalankan `export HTTPS_PROXY=http://proxy:port` dulu, lalu ganti `sudo sh` dengan `sudo -E sh`.
+- Muncul `This system does not allow running the downloaded sultrakey`: tunjuk folder yang boleh menjalankan
+  program, misalnya `... | sudo TMPDIR=/root sh` (pakai proxy: `... | sudo -E TMPDIR=/root sh`).
+- Masih ditolak juga? Cek `systemctl is-active fapolicyd`. Kalau `active`, fapolicyd bisa memblokir program yang
+  belum terdaftar. Minta admin server mengizinkan sultrakey.
+
 ## Quick start
 
 1. Di repo aplikasi, siapkan `.env.example` berisi semua variabel (nilainya kosong, atau default yang bukan rahasia).
 2. Masukkan `.env` dan `.env.lock` ke `.gitignore`. Jangan pakai pola `.env*`, nanti `.env.example` ikut ke-ignore.
 3. `sultrakey init <app>` bikin key dan `.env` dari template.
-4. `sultrakey setup` menanyakan variabel yang masih kosong, lalu menyimpannya terenkripsi.
+4. `sultrakey setup` menampilkan semua variabel dalam satu layar: yang kosong diisi, yang sudah terisi boleh
+   dipertahankan atau diganti. Hasilnya disimpan terenkripsi.
 5. `sultrakey check` memastikan semua variabel terisi dan bisa di-decrypt.
 6. `sultrakey run -- <perintah>` men-decrypt nilainya, lalu menjalankan aplikasi.
 
@@ -114,7 +132,7 @@ REDIS_PASSWORD=
 | Perintah                            | Fungsi                                                                                     |
 | ----------------------------------- | ------------------------------------------------------------------------------------------ |
 | `init <app> [--owner user[:group]]` | Bikin key (tidak pernah menimpa yang sudah ada) dan `.env`. Bisa juga mengenkripsi `.env` lama yang masih polos. |
-| `setup`                             | Mengisi variabel kosong dalam satu layar. F1 = bantuan, Esc = batal.                       |
+| `setup`                             | Satu layar untuk semua variabel: isi yang kosong, ganti yang sudah terisi. Layar tetap terbuka walau semua sudah terisi. F1 = bantuan, Esc = batal tanpa menyimpan jawaban. |
 | `set <KEY> [--stdin \| --file F]`   | Mengganti satu nilai. Nilai tidak pernah dibaca dari argumen.                             |
 | `list`                              | Menampilkan nama variabel dan statusnya. Nilainya tidak pernah ditampilkan.                   |
 | `check`                             | Memeriksa semua variabel terisi, bisa di-decrypt, dan key-nya cocok.                                      |
@@ -442,7 +460,8 @@ Masih versi 0.6.0 atau lebih lama? Jalankan perintah install di atas sekali saja
 
 1. Dari [release terbaru](https://github.com/banksultra/sultrakey-releases/releases/latest), download binary untuk server
    (`sultrakey-x86_64-unknown-linux-musl`, ARM: `sultrakey-aarch64-unknown-linux-musl`) dan `SHA256SUMS`.
-2. Salin keduanya ke server, lalu cek binary-nya. Harus tercetak `OK`:
+2. Salin keduanya ke server, lalu cek binary-nya. Jangan taruh di `/tmp` kalau `/tmp` di-mount `noexec`
+   (umum di CentOS/Rocky hasil hardening); pakai folder home, misalnya `~/`. Harus tercetak `OK`:
 
    ```sh
    grep 'sultrakey-x86_64-unknown-linux-musl$' SHA256SUMS | sha256sum -c -
